@@ -1,3 +1,13 @@
 const http = require('http');
-http.createServer((req,res) => { res.end('Hello Node.js');}).listen(3000);
-console.log('server running on port 3000');
+
+const fs = require("fs");
+const server = http.createServer(function(req,res)
+{
+    fs.readFile("index.html",function(err, data){
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write(data);
+        res.end();
+    });
+});
+server.listen(3000);
+console.log("Server is running on 3000 port");
